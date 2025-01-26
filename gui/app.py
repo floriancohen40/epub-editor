@@ -1,11 +1,12 @@
 import customtkinter as ctk, os
-from logic import load_styles, modify_epub_title, extract_file_from_zip, update_file_in_zip, get_epub_title
-from gui import StatusBar, FileSelector, StyledButton, TitleInput
+from gui import *
+from logic import *
 
 class App(ctk.CTk):
   def __init__(self):
     super().__init__()
     self.title("Modifier EBOOK")
+    self.iconbitmap(get_assets_file_path("assets/icons/book.ico"))
     self.xml_file_path = "OEBPS/root.opf"
     self.geometry("500x400")
 
@@ -34,11 +35,11 @@ class App(ctk.CTk):
     self.modify_button.pack(pady=10)
     
     # Events
-    self.file_selector.event.on('file_selected', self.on_file_selected)
+    self.file_selector.event.on("file_selected", self.on_file_selected)
 
   def load_app_styles(self):
     """Charge les styles depuis le fichier JSON."""
-    styles_path = os.path.join("assets", "styles.json")
+    styles_path = "assets/styles.json"
     try:
       return load_styles(styles_path)
     except FileNotFoundError:
@@ -81,7 +82,7 @@ class App(ctk.CTk):
       return
     
     try:
-      # Simuler l'appel de la logique de modification
+      # Simuler l"appel de la logique de modification
       # Vous pouvez remplacer cela par un appel à zip_handler et xml_modifier
       # Exemple : modifier_xml_dans_zip(zip_path, xml_filename, modifications)
       self.update_epub_title(zip_path, title)
