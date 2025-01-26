@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from .wrapping_label import WrappingLabel
 
 class StatusBar(ctk.CTkFrame):
     def __init__(self, parent, styles: dict = {}):
@@ -8,7 +9,7 @@ class StatusBar(ctk.CTkFrame):
         self.configure(height=30)
 
         # Label pour afficher les messages
-        self.label = ctk.CTkLabel(self, textvariable=self.message, anchor="center")
+        self.label = WrappingLabel(self, textvariable=self.message, anchor="center")
         self.label.pack(fill="x", padx=10)
 
     def set_status(self, message, error=False):

@@ -9,6 +9,7 @@ class App(ctk.CTk):
     self.iconbitmap(get_assets_file_path("assets/icons/book.ico"))
     self.xml_file_path = "OEBPS/root.opf"
     self.geometry("500x400")
+    self.minsize(300, 400)
 
     # Configuration globale du thème
     ctk.set_appearance_mode("dark")  # Modes : "System" (par défaut), "Light", "Dark"
@@ -19,20 +20,18 @@ class App(ctk.CTk):
     self.file_selector = FileSelector(self, styles=self.styles, width=400, height=100)
     self.status_bar = StatusBar(self, styles=self.styles)
     self.title_input = TitleInput(self, styles=self.styles, width=400, height=100)
-
-    # Placement des widgets
-    self.file_selector.pack(pady=(20, 10))
-    self.status_bar.pack(side="bottom", fill="x")
-    self.title_input.pack(pady=(10, 20))
-    
-    # Bouton pour lancer la modification
     self.modify_button = StyledButton(
         self,
         text="Modifier le EBOOK",
         command=self.modify_file,
         styles=self.styles
     )
-    self.modify_button.pack(pady=10)
+
+    # Placement des widgets
+    self.file_selector.pack(pady=(20, 10), padx=35)
+    self.title_input.pack(pady=(10, 20), padx=35)
+    self.modify_button.pack(pady=10, padx=10)
+    self.status_bar.pack(side="bottom", fill="x")
     
     # Events
     self.file_selector.event.on("file_selected", self.on_file_selected)

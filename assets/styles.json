@@ -11,7 +11,7 @@
   },
   "entry": {
       "corner_radius": 6,
-      "fg_color": "white",
-      "text_color": "black"
+      "fg_color": "#1D3557",
+      "text_color": "white"
   }
 }

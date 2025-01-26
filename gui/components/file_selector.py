@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from tkinter import filedialog
 from .buttons import StyledButton
+from .wrapping_label import WrappingLabel
 from ..event_emiter import EventEmiter
 
 class FileSelector(ctk.CTkFrame):
@@ -12,17 +13,13 @@ class FileSelector(ctk.CTkFrame):
         
         self.pack_propagate(0)
 
-        # Label
-        self.frame_title = ctk.CTkLabel(self, text="Sélectionnez un fichier EPUB")
-        self.frame_title.pack(pady=5)
-
-        # Champ d'entrée
-        self.label = ctk.CTkLabel(self, textvariable=self.file_path, width=250, text_color="white", font=ctk.CTkFont(slant="italic"), anchor="w")
-        self.label.pack(side="right", padx=(15, 5), pady=(0, 15))
-
-        # Bouton "Parcourir"
+        self.frame_title = WrappingLabel(self, text="Sélectionnez un fichier EPUB")
         self.browse_button = StyledButton(self, text="Parcourir", command=self.browse_file, styles=self.styles)
-        self.browse_button.pack(side="left", padx=(15, 5), pady=(0, 15))
+        self.label = WrappingLabel(self, textvariable=self.file_path, width=250, text_color="white", font=ctk.CTkFont(slant="italic"), anchor="w")
+
+        self.frame_title.pack(pady=5, fill="x")
+        self.browse_button.pack(side="left", padx=(10, 10), pady=(0, 15))
+        self.label.pack(side="right", padx=(10, 10), pady=(0, 15))
 
     def browse_file(self):
         """Ouvre une boîte de dialogue pour sélectionner un fichier EPUB."""
