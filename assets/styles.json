@@ -1,0 +1,17 @@
+{
+  "button": {
+      "corner_radius": 8,
+      "text_color": "white",
+      "fg_color": "#1D3557",
+      "hover_color": "#457B9D"
+  },
+  "label": {
+    "error": "red",
+    "success": "green"
+  },
+  "entry": {
+      "corner_radius": 6,
+      "fg_color": "white",
+      "text_color": "black"
+  }
+}
