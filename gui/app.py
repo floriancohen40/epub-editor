@@ -7,7 +7,7 @@ class App(ctk.CTk):
     super().__init__()
     self.title("Modifier EBOOK")
     self.iconbitmap(get_assets_file_path("assets/icons/book.ico"))
-    self.xml_file_path = "OEBPS/root.opf"
+    self.xml_file_path = "META-INF/container.xml"
     self.geometry("500x400")
     self.minsize(300, 400)
 
@@ -46,16 +46,16 @@ class App(ctk.CTk):
       return {}
   
   def on_file_selected(self):
-    zip_path = self.file_selector.get_selected_file()
+    epub_path = self.file_selector.get_selected_file()
     
-    if(not os.path.isfile(zip_path)):
+    if(not os.path.isfile(epub_path)):
       self.status_bar.set_status("Fichier introuvable.", error=True)
       self.file_selector.reset()
       return
     
     try:
-      self.extracted_file_path = extract_file_from_zip(zip_path, self.xml_file_path)
-      epub_title = get_epub_title(self.extracted_file_path)
+      self.epub_file = EPUBFile(epub_path)
+      epub_title = self.epub_file.get_title()
       
       if(epub_title):
         self.title_input.title.set(epub_title)
@@ -68,11 +68,10 @@ class App(ctk.CTk):
       return
 
   def modify_file(self):
-    """Logique pour modifier le fichier XML dans le ZIP."""
-    zip_path = self.file_selector.get_selected_file()
+    epub_path = self.file_selector.get_selected_file()
     title = self.title_input.get_title()
     
-    if not zip_path:
+    if not epub_path:
       self.status_bar.set_status("Veuillez sélectionner un fichier EPUB.", error=True)
       return
     
@@ -81,25 +80,19 @@ class App(ctk.CTk):
       return
     
     try:
-      # Simuler l"appel de la logique de modification
-      # Vous pouvez remplacer cela par un appel à zip_handler et xml_modifier
-      # Exemple : modifier_xml_dans_zip(zip_path, xml_filename, modifications)
-      self.update_epub_title(zip_path, title)
+      self.update_epub_title(epub_path, title)
     except Exception as e:
       self.status_bar.set_status(f"Erreur : {e}", error=True)
           
-  def update_epub_title(self, zip_path, title):
-    xml_file_path = "OEBPS/root.opf"
-    
-    if(not os.path.isfile(zip_path)):
+  def update_epub_title(self, epub_path, title):
+    if(not os.path.isfile(epub_path)):
       self.status_bar.set_status("Fichier introuvable.", error=True)
       return
     
     try:
-      if(not self.extracted_file_path):
-        self.extracted_file_path = extract_file_from_zip(zip_path, xml_file_path)
-      updated_content = modify_epub_title(self.extracted_file_path, title)
-      update_file_in_zip(zip_path, xml_file_path, updated_content)
+      if(not self.epub_file):
+        self.epub_file = EPUBFile(epub_path)
+      self.epub_file.set_title(title)
     except FileNotFoundError:
       self.status_bar.set_status("Vérifiez le format du fichier.", error=True)
       return
