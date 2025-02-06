@@ -1,17 +1,35 @@
 {
   "button": {
-      "corner_radius": 8,
+    "common": {
+      "corner_radius": 8
+    },
+    "normal": {
       "text_color": "white",
       "fg_color": "#1D3557",
       "hover_color": "#457B9D"
+    },
+    "disabled": {
+      "text_color": "#c2c3c4",
+      "fg_color": "#464b52",
+      "hover_color": "#464b52"
+    }
   },
   "label": {
     "error": "red",
     "success": "green"
   },
   "entry": {
-      "corner_radius": 6,
+    "common": {
+      "corner_radius": 6
+    },
+    "normal": {
       "fg_color": "#1D3557",
       "text_color": "white"
+    },
+    "disabled": {
+      "corner_radius": 6,
+      "fg_color": "#464b52",
+      "text_color": "#c2c3c4"
+    }
   }
 }

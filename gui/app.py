@@ -59,6 +59,9 @@ class App(ctk.CTk):
       
       if(epub_title):
         self.title_input.title.set(epub_title)
+        self.title_input.set_state("normal")
+        self.modify_button.set_state("normal")
+        self.status_bar.set_status('')
     except FileNotFoundError:
       self.status_bar.set_status("Vérifiez le format du fichier.", error=True)
       self.file_selector.reset()

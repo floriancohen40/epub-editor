@@ -14,7 +14,7 @@ class FileSelector(ctk.CTkFrame):
         self.pack_propagate(0)
 
         self.frame_title = WrappingLabel(self, text="Sélectionnez un fichier EPUB")
-        self.browse_button = StyledButton(self, text="Parcourir", command=self.browse_file, styles=self.styles)
+        self.browse_button = StyledButton(self, text="Parcourir", command=self.browse_file, styles=self.styles, state="normal")
         self.label = WrappingLabel(self, textvariable=self.file_path, width=250, text_color="white", font=ctk.CTkFont(slant="italic"), anchor="w")
 
         self.frame_title.pack(pady=5, fill="x")
